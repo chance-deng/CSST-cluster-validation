@@ -38,9 +38,6 @@ All report figures are stored under [`figures/`](figures/) with relative Markdow
 └── REQUIREMENTS.md       # Python package notes
 ```
 
-## Key Metrics
-
-The current robust working point is an `i<22` or nearby bright-galaxy selection plus an `n_members` threshold. The best F1-like trade-off per field reaches recovery of roughly `68-83%` and purity proxy of roughly `36-45%`. High-purity candidate subsets can reach `~90%` purity proxy in some fields, with low recovery.
 
 ## Notes
 
