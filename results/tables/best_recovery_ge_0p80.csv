@@ -1,0 +1,2 @@
+cut,n_candidates,matched_candidates,matched_true_clusters,recovery,purity_proxy,candidate_density,f1
+baseline: i<22.0+n_members>=7,4590,1872,956,0.8047138047138047,0.40784313725490196,3.8636363636363638,0.5413304585497588
