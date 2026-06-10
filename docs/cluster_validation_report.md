@@ -22,7 +22,7 @@
 |---|---|---|
 | 星系过密度值的计算方法及程序规范性 | 已完成 blind search v1.1 候选体提取，包含红移切片、二维峰值、候选体合并和成员数估计 | 第 5 节 |
 | 星系过密度可信度的计算方法及程序规范性 | 已用 `significance`、`n_members`、PPM richness、PPM z_rms 等作为可信度指标并做阈值扫描 | 第 6、9 节 |
-| 测光红移准确率 | 已完成 7band `i<22` cross-hemisphere LSTM photo-z 指标 | 第 4 节 |
+| 测光红移准确率 | 已完成完整 7band cross-hemisphere LSTM photo-z 指标 | 第 4 节 |
 | 候选体准确率 | 以 purity proxy 作为当前候选体准确率代理 | 第 8、9 节 |
 | 候选体误证率 | false-detection proxy = `1 - purity proxy` | 第 8、9 节 |
 | 候选体完备度 | completeness / recovery = matched true clusters / covered true clusters | 第 8、9 节 |
@@ -76,31 +76,34 @@
 
 ## 4. 测光红移星表与 LSTM photo-z 结果
 
-7band `i<22` 样本使用 cross-hemisphere LSTM 训练策略：
+完整 7band 样本使用 cross-hemisphere LSTM 训练策略：
 
 - Hemisphere A 训练，预测 Hemisphere B；
 - Hemisphere B 训练，预测 Hemisphere A；
-- `zfinal` 写入最终 5 个 field 的 blind search 输入 FITS；
+- 两个 cross-target 预测拼接为最终测光红移星表；
+- `zfinal` 写入后续 blind search 输入 FITS；
 - `zpdf_l68/u68` 由 MC dropout 的 `z_mc_std` 给出，若无有效 scatter 则使用 `0.03*(1+zfinal)` fallback。
 
 关键输出目录：
 
-`/Users/dengcanze/Documents/CSST/Codex/result/lstm_cross_hemisphere_photoz_i22`
+`/Users/dengcanze/Documents/CSST/Codex/result/lstm_cross_hemisphere_photoz`
 
 ### 4.1 Photo-z 精度
 
+下表采用完整 7band cross-hemisphere 结果。后续 `i<22` 是在 blind search 阶段对星系样本做亮度截断，不应与这里的完整 7band photo-z 精度混用。
+
 | direction | sample role | N | sigma_NMAD | outlier fraction | bias |
 |---|---|---:|---:|---:|---:|
-| train A predict B | internal holdout | 281,484 | 0.0487 | 6.57% | 0.0019 |
-| train A predict B | cross target | 524,733 | 0.0697 | 11.94% | -0.0045 |
-| train B predict A | internal holdout | 262,366 | 0.0568 | 10.60% | -0.0025 |
-| train B predict A | cross target | 562,967 | 0.0630 | 10.41% | 0.0316 |
+| train A predict B | internal holdout | 1,004,157 | 0.0358 | 4.23% | -0.0049 |
+| train A predict B | cross target | 1,824,507 | 0.0499 | 6.37% | -0.0016 |
+| train B predict A | internal holdout | 912,254 | 0.0393 | 5.89% | -0.0001 |
+| train B predict A | cross target | 2,008,314 | 0.0511 | 5.20% | 0.0009 |
 
-![hemisphere A photo-z](../figures/hemisphere_A_i22_cross_lstm_photoz_vs_ztrue.png)
+![full7band train A predict B photo-z](../figures/full7band_train_A_predict_B_cross_target_ztrue_vs_zphot.png)
 
-![hemisphere B photo-z](../figures/hemisphere_B_i22_cross_lstm_photoz_vs_ztrue.png)
+![full7band train B predict A photo-z](../figures/full7band_train_B_predict_A_cross_target_ztrue_vs_zphot.png)
 
-### 4.2 五个 field 的 photo-z 输入星表
+### 4.2 五个 field 的 `i<22` bright-subsample photo-z 输入星表
 
 | field | half | rows | hull area deg² | bbox area deg² | z_phot median | mag_i median |
 |---:|---|---:|---:|---:|---:|---:|
@@ -285,7 +288,7 @@ Baseline：
 
 ## 12. 阶段性结论
 
-1. Cross-hemisphere LSTM photo-z 在 `i<22` 亮星样本上达到 `sigma_NMAD ~ 0.063-0.070` 的跨半球泛化精度，outlier fraction 约 `10-12%`，可作为 cluster blind search 的 photo-z 输入。
+1. Cross-hemisphere LSTM photo-z 在完整 7band cross-target 上达到 `sigma_NMAD ~ 0.050-0.051` 的跨半球泛化精度，outlier fraction 约 `5.2-6.4%`，可作为 cluster blind search 的 photo-z 输入。
 2. 直接用 blind search v1.1 搜索时，五个 field 的 true cluster recovery 普遍可达到 `90%` 以上，但候选体数量较多，purity proxy 只有约 `20-30%`。
 3. 使用 `n_members` 阈值后，候选体数量显著下降，purity proxy 可提升到约 `35-45%`，同时保留 `67-83%` 左右的 recovery，是当前较稳健的主工作点。
 4. 极高纯度版本可以通过很高的 `n_members` 阈值获得，例如 Field04 和 Field05 可以达到约 `90%` purity proxy，但 recovery 降到约 `5-8%`，更适合作为“高置信候选体子样本”。
