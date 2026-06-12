@@ -6,7 +6,6 @@
 
 - hemisphere A 训练，预测 hemisphere B；
 - hemisphere B 训练，预测 hemisphere A；
-- 不运行 EAZY-py，不计算新的 stellar mass；
 - 将 cross-target 预测写成 5 个 field 的最终 blind-search 可用 FITS 星表。
 
 ## 输入与输出
