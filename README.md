@@ -381,14 +381,14 @@ For the full parameter-by-parameter guide (in bilingual Chinese/English), see [`
 
 ## Citation
 
-If you use this code in a publication, please cite the CSST cluster-search manuscript and link to this repository.
+If you use this code in a publication, please cite the CSST cluster-search manuscript (C.Deng et al., in prep.) and link to this repository.
 
 ```bibtex
-@software{csst_blindsearch,
+@ARTICLE{csst_blindsearch,
   title  = {Blindsearch: configurable blind overdensity cluster finder for CSST},
   author = {},
   url    = {<your-repo-url>},
-  year   = {2025}
+  year   = {2026}
 }
 ```
 
