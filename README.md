@@ -4,7 +4,7 @@ A clean, configurable implementation of the **CSST blind overdensity cluster-fin
 
 It detects galaxy-cluster candidates from photometric-redshift catalogs using **only sky coordinates (RA, Dec) and `z_phot`** (plus an optional magnitude cut). It does **not** rely on truth-cluster labels, halo information, red-sequence priors, PPM validation, or cross-match results during detection — all of those belong to post-processing validation, which is intentionally kept out of this repository.
 
-The pipeline implements the fiducial algorithm described in the CSST cluster-search manuscript:
+The pipeline implements the fiducial algorithm described in the CSST cluster-search manuscript (C,Deng et al., in prep.):
 
 - dynamic, overlapping redshift slices;
 - Gaussian-smoothed count maps on a sky grid;
