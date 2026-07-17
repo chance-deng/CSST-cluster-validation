@@ -1,0 +1,56 @@
+catalog:
+  path: /Users/dengcanze/Documents/SMG/cosmos_data/COSMOS-Web_DR1/filtered_galaxies_mask_all_easy.fits
+  hdu: 1
+  ra_column: ra
+  dec_column: dec
+  redshift_column: zfinal
+  magnitude_column: null
+  magnitude_limit: null
+  exclude_flag_star: true
+  exclude_flag_star_hsc: true
+  require_warn_flag_zero: true
+
+cosmology:
+  h0: 67.66
+  omega_m: 0.3111
+
+slices:
+  z_min: 0.01
+  z_max: 3.7
+  z_step: 0.01
+  half_width_factor: 0.03
+  min_galaxies_per_slice: 5
+
+density_map:
+  pixel_size_arcmin: 0.3
+  smoothing_scales_mpc: [0.4, 0.8, 1.2]
+  background_sigma_factor: 15.0
+  sigma_pixel_min: 1.0
+  sigma_pixel_max: 15.0
+  background_floor: 1.0e-5
+  maximum_filter_size: 5
+
+candidate_density:
+  background_area_deg2: 0.5225
+  aperture_radius_factor: 1.5
+  footprint_cell_deg: 0.0125
+
+peaks:
+  significance_min: 0.2
+  overdensity_min: 0.5
+  refinement_radius_factor: 1.5
+
+merge:
+  spatial_radius_mpc_h: 1.0
+  redshift_factor: 0.04
+  min_detected_slices: 2
+  z_bin: 0.02
+  sky_cell_size_deg: 0.2
+
+output:
+  directory: /Users/dengcanze/Documents/CSST/blindsearch/examples/cosmos_web_dr1_z0p01_3p7_target1600
+  candidate_filename: cosmos_web_dr1_our_blindsearch_candidates.csv
+  raw_peak_filename: cosmos_web_dr1_our_blindsearch_raw_peaks.csv
+  slice_filename: cosmos_web_dr1_our_blindsearch_slice_stats.csv
+  merge_filename: cosmos_web_dr1_our_blindsearch_merge_assignments.csv
+  summary_filename: cosmos_web_dr1_our_blindsearch_summary.json

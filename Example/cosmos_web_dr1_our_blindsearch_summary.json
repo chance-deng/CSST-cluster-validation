@@ -1,0 +1,47 @@
+{
+  "input_catalog": "/Users/dengcanze/Documents/SMG/cosmos_data/COSMOS-Web_DR1/filtered_galaxies_mask_all_easy.fits",
+  "n_galaxies_used": 541637,
+  "n_slices": 370,
+  "n_raw_peaks": 41292,
+  "n_candidates": 1718,
+  "cosmology": {
+    "H0": 67.66,
+    "h": 0.6766,
+    "Omega_m": 0.3111,
+    "Omega_Lambda": 0.6889000000000001
+  },
+  "candidate_density": {
+    "definition": "delta_candidate = (N_member / (pi*(aperture_radius_factor*R_G)^2)) / (N_slice_total / S_tight) - 1",
+    "background_area_deg2": 0.5225,
+    "aperture_radius_factor": 1.5,
+    "footprint_cell_deg": 0.0125
+  },
+  "top_candidate": {
+    "ID": 1,
+    "RA": 149.932302,
+    "Dec": 2.512732,
+    "z_peak": 0.7,
+    "significance": 4.56,
+    "delta": 8.353,
+    "delta_candidate": 0.523,
+    "best_scale_mpc": 1.2,
+    "n_member_scale_mpc": 1.2,
+    "n_member_z_cen": 0.69,
+    "det_unique_slices": 13,
+    "z_min_det": 0.64,
+    "z_max_det": 0.76,
+    "z_range": "0.64-0.76",
+    "scales_hit": "0.4|0.8|1.2",
+    "n_members": 1804,
+    "n_member_RA": 149.932576,
+    "n_member_Dec": 2.512926,
+    "n_slice_total": 41693,
+    "background_area_deg2": 0.5225,
+    "rho_aper_mpc2": 175.31144416280458,
+    "rho_bg_mpc2": 115.10500720431571,
+    "aperture_area_mpc2": 10.290258052547323,
+    "aperture_area_effective_deg2": 0.014843750000000003,
+    "aperture_area_full_mpc2": 10.178760197630927,
+    "background_area_mpc2": 362.2170834496657
+  }
+}
