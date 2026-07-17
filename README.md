@@ -346,19 +346,9 @@ Key columns in the **candidate table**:
 
 ## Examples
 
-Two worked examples ship with this repo.
-
-### CSST Field-05 mock
-
-`config_field05_i22_delta_candidate.yaml` runs the fiducial pipeline on a CSST Field-05 7-band mock catalog with an $i<22.0$ cut and `background_area_deg2: 8.364`. It is the reference config for the manuscript's $\delta_{\rm candidate}$ analysis. Run it with:
-
-```bash
-python3 blind_search.py --config config_field05_i22_delta_candidate.yaml
-```
-
 ### COSMOS-Web DR1
 
-[`examples/cosmos_web_dr1_z0p01_3p7_target1600/`](examples/cosmos_web_dr1_z0p01_3p7_target1600/) contains a COSMOS-Web DR1 run over $0.01\le z\le 3.7$, together with its config, candidate table, raw peaks, slice stats, merge assignments, and summary JSON. See [`examples/cosmos_web_dr1_z0p01_3p7_target1600/README.md`](examples/cosmos_web_dr1_z0p01_3p7_target1600/README.md) and [`COSMOS_WEB_CONFIGURATION.md`](COSMOS_WEB_CONFIGURATION.md) for details.
+[`examples/cosmos_web_dr1_z0p01_3p7_target1600/`](examples/cosmos_web_dr1_z0p01_3p7_target1600/) contains a COSMOS-Web DR1 run over $0.01\le z\le 3.7$, together with its config, candidate table, raw peaks, slice stats, merge assignments, and summary JSON. 
 
 > **Note on extended keys:** the COSMOS-Web example YAML shows some extra keys (`hdu`, `exclude_flag_star`, `footprint_cell_deg`, etc.). These are consumed by an extended real-data finder; the clean `blind_search.py` in this repo ignores unknown keys and only reads the parameters documented under [Configuration Reference](#configuration-reference-step-by-step). Do not mix the COSMOS-Web `score`/`effective_members_peak` columns with the CSST-mock `delta_candidate`/`n_members` definitions.
 
