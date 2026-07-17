@@ -1,0 +1,106 @@
+# Configurable blind overdensity-search example.
+# 可配置 blind overdensity search 示例配置。
+
+catalog:
+  # Input catalog. FITS, CSV, TXT, and ECSV are supported.
+  # 输入星表。支持 FITS、CSV、TXT 和 ECSV。
+  path: /Users/dengcanze/Documents/CSST/Codex/result/blindsearch_inputs/field05_7band_i_band_cuts/field05_7band_i_lt_22p0_blindsearch_input.fits
+
+  # Column mapping. Change these when using a different catalog schema.
+  # 列名映射。更换星表格式时只需要改这里。
+  ra_column: ra
+  dec_column: dec
+  redshift_column: zfinal
+
+  # Optional magnitude cut. Set both to null to disable.
+  # 可选星等截断。两项设为 null 即关闭。
+  magnitude_column: null
+  magnitude_limit: null
+
+cosmology:
+  # Jiutian / Planck 2018 default used in the later CSST reruns.
+  # 后续 Jiutian rerun 使用的 Planck 2018 默认参数。
+  h0: 67.66
+  omega_m: 0.3111
+
+slices:
+  # Global photo-z search interval.
+  # 全局 photo-z 搜索范围。
+  z_min: 0.0
+  z_max: 2.2
+
+  # Slice centers are sampled every z_step.
+  # 红移切片中心步长。
+  z_step: 0.01
+
+  # A slice centered at z_s keeps |z_phot - z_s| <= half_width_factor * (1 + z_s).
+  # 切片半宽定义为 half_width_factor * (1 + z_s)。
+  half_width_factor: 0.03
+  min_galaxies_per_slice: 5
+
+density_map:
+  # Pixel size in arcmin. Manuscript fiducial value: 0.3 arcmin.
+  # 像素尺寸，单位 arcmin。论文 fiducial 值为 0.3 arcmin。
+  pixel_size_arcmin: 0.3
+
+  # Gaussian physical smoothing scales R_G in physical Mpc.
+  # 高斯平滑物理尺度 R_G，单位 physical Mpc。
+  smoothing_scales_mpc: [0.4, 0.8, 1.2]
+
+  # Local background kernel is background_sigma_factor times the cluster-scale kernel.
+  # 局部背景核宽度 = background_sigma_factor * 团簇尺度核宽度。
+  background_sigma_factor: 15.0
+
+  # Numerical clipping for sigma_pix.
+  # sigma_pix 的数值截断范围。
+  sigma_pixel_min: 1.0
+  sigma_pixel_max: 15.0
+  background_floor: 1.0e-5
+  maximum_filter_size: 5
+
+candidate_density:
+  # Aperture overdensity proxy:
+  # delta_candidate = (N_member / [pi*(f*R_G)^2]) / (N_slice,total / S_tight) - 1.
+  # 孔径过密度参考量：
+  # delta_candidate = (N_member / [pi*(f*R_G)^2]) / (N_slice,total / S_tight) - 1。
+  #
+  # S_tight in square degrees. Set null to skip this quantity.
+  # tight footprint 面积，单位 deg^2。设为 null 则跳过该量。
+  background_area_deg2: 8.364
+  aperture_radius_factor: 1.5
+
+peaks:
+  # Raw peak thresholds: S >= significance_min and delta >= overdensity_min.
+  # raw peak 阈值：S >= significance_min 且 delta >= overdensity_min。
+  significance_min: 0.2
+  overdensity_min: 0.5
+
+  # Refine raw peak centers using galaxies within refinement_radius_factor * R_G.
+  # 使用 refinement_radius_factor * R_G 内的星系平均位置修正峰中心。
+  refinement_radius_factor: 1.5
+
+merge:
+  # Greedy NMS duplicate merging thresholds.
+  # greedy NMS 重复探测合并阈值。
+  spatial_radius_mpc_h: 1.0
+  redshift_factor: 0.04
+
+  # Keep final candidates detected in at least this many distinct z slices.
+  # 最终候选体至少需要在这么多个不同红移切片中被探测到。
+  min_detected_slices: 2
+
+  # Coarse indexing parameters for faster NMS.
+  # 加速 NMS 的粗网格索引参数。
+  z_bin: 0.02
+  sky_cell_size_deg: 0.2
+
+output:
+  # Output directory. For CSST project runs, keep products under Codex/result.
+  # 输出目录。CSST 项目内运行建议放在 Codex/result 下。
+  directory: /Users/dengcanze/Documents/CSST/Codex/result/blindsearch_generic_example
+
+  candidate_filename: blindsearch_candidates.csv
+  raw_peak_filename: blindsearch_raw_peaks.csv
+  slice_filename: blindsearch_slice_stats.csv
+  merge_filename: blindsearch_merge_assignments.csv
+  summary_filename: blindsearch_summary.json
