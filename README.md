@@ -348,7 +348,7 @@ Key columns in the **candidate table**:
 
 ### COSMOS-Web DR1
 
-[`examples/cosmos_web_dr1_z0p01_3p7_target1600/`](examples/cosmos_web_dr1_z0p01_3p7_target1600/) contains a COSMOS-Web DR1 run over $0.01\le z\le 3.7$, together with its config, candidate table, raw peaks, slice stats, merge assignments, and summary JSON. 
+[`Examples/`](Examples/) contains a COSMOS-Web DR1 run over $0.01\le z\le 3.7$, together with its config, candidate table, raw peaks, slice stats, merge assignments, and summary JSON. 
 
 > **Note on extended keys:** the COSMOS-Web example YAML shows some extra keys (`hdu`, `exclude_flag_star`, `footprint_cell_deg`, etc.). These are consumed by an extended real-data finder; the clean `blind_search.py` in this repo ignores unknown keys and only reads the parameters documented under [Configuration Reference](#configuration-reference-step-by-step). Do not mix the COSMOS-Web `score`/`effective_members_peak` columns with the CSST-mock `delta_candidate`/`n_members` definitions.
 
